@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<HTML ng-app="search">
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<SCRIPT SRC="js/angular.js"></SCRIPT>
+<SCRIPT src="js/angular-resource.js"></SCRIPT>
+<SCRIPT SRC="js/work.js"></SCRIPT>
+<TITLE>Twitter Search</TITLE>
+</HEAD>
+<BODY>
+<div class="container" ng-controller="searchCtrl">
+<div class="row" style="margin-top:50px">
+    <div class="col-sm-3 col-sm-offset-3">
+         <input class="form-control" type="text" ng-model="search_string" placeholder="Enter text here"/>
+    </div>
+    <div class="col-sm-1">
+        <button class="btn btn-default" ng-click="timer();search();repeatSearch()">Search</button>
+    </div>
+    <div class="col-sm-1 ">
+        <p  style="text-align:center" ng-show="clicked">{{refreshTime}}</p>
+    </div>
+     <div class="col-sm-1 ">
+        <button class="btn btn-warning" ng-click="stop()">Stop</button>
+    </div>
+
+    
+</div>
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+    <hr>
+    <ul class="media-list"> 
+        <li class="media" ng-repeat="tweet in tweets">
+            <a class="pull-left" href="http://twitter.com/{{tweet.url}}">
+              <img class="media-object" src={{tweet.img}} >
+            </a>
+            <div class="media-body">
+              <h4 class="media-heading">{{tweet.name}}</h4>
+              {{tweet.text}}
+            </div>
+        </li>
+    </ul>
+    </div>
+</div>
+</div>    
+</BODY>
+</HTML>
