@@ -2,7 +2,7 @@ var myApp = angular.module('search',['ngResource'])
 
  myApp.controller('searchCtrl', function($scope,$http,$interval) {
     
-    var a = 15 //refresh time in seconds
+    var a = 10 //refresh time in seconds
     
     $scope.refreshTime = a   
     $scope.clicked = false;
@@ -34,6 +34,9 @@ var myApp = angular.module('search',['ngResource'])
     
     
     function perfomsearch(){
+            if (  $scope.tweets.length > 0 ) {
+                $scope.tweets.length = 0    
+            }
             var text = $scope.search_string;
             $http.get('/search_string',
                 {  params: {'q' : text}
@@ -48,16 +51,12 @@ var myApp = angular.module('search',['ngResource'])
     }; 
      
     $scope.search = function() {
-        if (  $scope.tweets.length > 0 ) {
-                $scope.tweets.length = 0
-        }
         perfomsearch();
         $scope.clicked = true;
     }
     
     $scope.repeatSearch = function(){
-        loopSearch =  $interval(perfomsearch, $scope.refreshTime*1000)
-       
+        loopSearch =  $interval(perfomsearch, $scope.refreshTime*1000) 
     }
     
     
